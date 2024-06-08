@@ -1,17 +1,9 @@
-import { Employee } from "../schemas/employeeSchema.js"
+import { Employee } from '../schemas/employeeSchema.js'
 
-const createNewEmployee=(data)=>{
+const createNewEmployee = (data) => {}
 
-}
+const getAllEmployees = (data) => {}
+const editEmployee = (data) => {}
+const removeEmployee = (data) => {}
 
-const getAllEmployees=(data)=>{
-
-}
-const editEmployee=(data)=>{
-
-}
-const removeEmployee=(data)=>{
-
-}
-
-export {createNewEmployee,getAllEmployees,editEmployee,removeEmployee}
+export { createNewEmployee, getAllEmployees, editEmployee, removeEmployee }

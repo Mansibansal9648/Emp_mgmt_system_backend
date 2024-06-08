@@ -1,8 +1,6 @@
-import mongoose from "mongoose";
-import { Schema } from "mongoose";
+import mongoose from 'mongoose'
+import { Schema } from 'mongoose'
 
-const schema = new Schema({
+const schema = new Schema({})
 
-});
-
-export const Employee = mongoose.model("employees", schema);
+export const Employee = mongoose.model('employees', schema)

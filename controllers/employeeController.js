@@ -1,20 +1,22 @@
-import { createNewEmployee,getAllEmployees,editEmployee,removeEmployee } from "../repository/employeeRepository.js"
+import {
+    createNewEmployee,
+    getAllEmployees,
+    editEmployee,
+    removeEmployee,
+} from '../repository/employeeRepository.js'
 
-const createEmployee=(req,res)=>{
-    createNewEmployee();
+const createEmployee = (req, res) => {
+    createNewEmployee()
 }
 
-const getEmployees=(req,res)=>{
-    getAllEmployees();
-
+const getEmployees = (req, res) => {
+    getAllEmployees()
 }
-const updateEmployee=(req,res)=>{
-    editEmployee();
-
+const updateEmployee = (req, res) => {
+    editEmployee()
 }
-const deleteEmployee=(req,res)=>{
-    removeEmployee();
-
+const deleteEmployee = (req, res) => {
+    removeEmployee()
 }
 
-export {createEmployee,getEmployees,updateEmployee,deleteEmployee}
+export { createEmployee, getEmployees, updateEmployee, deleteEmployee }
