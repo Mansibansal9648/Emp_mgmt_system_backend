@@ -16,8 +16,9 @@ app.use(cors({
   app.use(express.json());
   app.use("/api", employeeRouter);
 
-app.post('/',()=>{
+app.post('/',(req,res)=>{
     console.log("hello world")
+    return res.send("hello world")
 })
 
 app.listen(process.env.PORT, () => {
