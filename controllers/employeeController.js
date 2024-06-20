@@ -12,10 +12,9 @@ import {
 const createEmployee = async (req, res) => {
   try {
     let data = req.body;
-    let date=data.date_of_joining;
-    if(date>new Date()){
-      throw new Error("Date should not be greater than today's date")
-    }
+    let email = data.email.toLowerCase().split("@")[0].replaceAll(".", "");
+    data.email = email + "@" + data.email.split("@")[1];
+
     // console.log("body", data);
     let result = await createNewEmployee(data);
     // console.log("result",result)

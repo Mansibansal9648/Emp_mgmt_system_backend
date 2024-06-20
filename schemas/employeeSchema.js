@@ -13,7 +13,7 @@ const schema = new Schema({
   designation: { type: String, required: true, match: /^[a-zA-Z\s]{3,35}$/ },
   department: { type: String, required: true, match: /^[a-zA-Z\s]{2,25}$/ },
   salary: {type: String, required:true, match: /^[0-9]{4,15}$/},
-  date_of_joining: {type: Date,required:true},
+  date_of_joining: {type: String,required:true},
   password: {
     type: String,
     default: "Admin@123",
