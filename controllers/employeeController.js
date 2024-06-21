@@ -30,8 +30,19 @@ const createEmployee = async (req, res) => {
   }
 };
 
-const getEmployees = (req, res) => {
-  getAllEmployees();
+const getEmployees = async (req, res) => {
+  try {
+    let result = await getAllEmployees();
+    return apiResponseSuccess(
+      result,
+      true,
+      200,
+      "Employee getting from DB successfully",
+      res
+    );
+  } catch (error) {
+    return apiResponseErr(null, false, 400, error.message, res);
+  }
 };
 const updateEmployee = (req, res) => {
   editEmployee();

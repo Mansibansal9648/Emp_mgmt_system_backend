@@ -31,7 +31,16 @@ const createNewEmployee = async (data) => {
   //   });
 };
 
-const getAllEmployees = (data) => {};
+const getAllEmployees = async() => {
+  try{
+    const existedEmployees = await Employee.find()
+    // console.log(existedEmployees)
+      return existedEmployees;
+
+  }catch(error){
+    throw error;
+  }
+};
 const editEmployee = (data) => {};
 const removeEmployee = (data) => {};
 
