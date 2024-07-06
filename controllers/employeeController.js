@@ -7,6 +7,7 @@ import {
 import {
     apiResponseSuccess,
     apiResponseErr,
+    apiResponsePagination,
 } from '../middlewares/apiResponse.js'
 
 const createEmployee = async (req, res) => {
@@ -32,12 +33,24 @@ const createEmployee = async (req, res) => {
 
 const getEmployees = async (req, res) => {
     try {
-        let result = await getAllEmployees()
-        return apiResponseSuccess(
-            result,
+        const { page, limit } = req.query
+        const offset = page && limit ? (page - 1) * parseInt(limit, 10) : null
+
+        let { totalEmployees, totalPages, currentPage, existedEmployees } =
+            await getAllEmployees(page, limit, offset)
+        let pagination = {
+            page: currentPage,
+            totalPages: totalPages,
+            totalItems: totalEmployees,
+        }
+        // console.log(result)
+
+        return apiResponsePagination(
+            existedEmployees,
             true,
             200,
             'Employee getting from DB successfully',
+            pagination,
             res
         )
     } catch (error) {

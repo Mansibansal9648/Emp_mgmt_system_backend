@@ -31,11 +31,18 @@ const createNewEmployee = async (data) => {
     //   });
 }
 
-const getAllEmployees = async () => {
+const getAllEmployees = async (page, limit, offset) => {
     try {
-        const existedEmployees = await Employee.find()
+        const existedEmployees = await Employee.find().skip(offset).limit(limit)
         // console.log(existedEmployees)
-        return existedEmployees
+        const totalEmployees = await Employee.countDocuments()
+        const totalPages = page && limit ? Math.ceil(totalEmployees / limit) : 1
+        return {
+            totalEmployees: totalEmployees,
+            totalPages: totalPages,
+            currentPage: page || 1,
+            existedEmployees,
+        }
     } catch (error) {
         throw error
     }
