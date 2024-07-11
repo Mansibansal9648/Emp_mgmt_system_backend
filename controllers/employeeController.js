@@ -60,8 +60,20 @@ const getEmployees = async (req, res) => {
 const updateEmployee = (req, res) => {
     editEmployee()
 }
-const deleteEmployee = (req, res) => {
-    removeEmployee()
+const deleteEmployee = async(req, res) => {
+    try{
+        const { employeeId } = req.query
+      let result = await removeEmployee(employeeId);
+      return apiResponseSuccess(
+        {},
+        true,
+        200,
+        'Employee deleted successfully',
+        res
+    )
+    }catch(error){
+        return apiResponseErr(null, false, 400, error.message, res)
+    }
 }
 
 export { createEmployee, getEmployees, updateEmployee, deleteEmployee }

@@ -15,6 +15,6 @@ router
     .post(createEmployeeSchema, validationHandler, createEmployee)
 router.route('/all-employees').get(getEmployees)
 router.route('/editemployee').post(updateEmployee)
-router.route('/deleteemployee').post(deleteEmployee)
+router.route('/delete-employee').delete(deleteEmployee)
 
 export default router

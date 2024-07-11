@@ -48,6 +48,19 @@ const getAllEmployees = async (page, limit, offset) => {
     }
 }
 const editEmployee = (data) => {}
-const removeEmployee = (data) => {}
+const removeEmployee = async (employeeId) => {
+    try {
+        const employee = await Employee.findById(employeeId)
+        if (employee && employee.id === employeeId) {
+            const deletedEmployee = await Employee.deleteOne(employee)
+            return deletedEmployee
+          
+        } else {
+            throw new Error("Employee doesn't exist")
+        }
+    } catch (error) {
+        throw error
+    }
+}
 
 export { createNewEmployee, getAllEmployees, editEmployee, removeEmployee }
