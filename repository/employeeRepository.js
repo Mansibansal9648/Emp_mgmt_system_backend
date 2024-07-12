@@ -85,14 +85,21 @@ const editEmployee = async (data) => {
 const removeEmployee = async (employeeId) => {
     try {
         const employee = await Employee.findById(employeeId)
-        if (employee && employee.id === employeeId) {
-            const deletedEmployee = await Employee.deleteOne(employee)
-            return deletedEmployee
-        } else {
+        // console.log(employee)
+        if(!employee){
+            // console.log("ghhik")
             throw new Error("Employee doesn't exist")
         }
+        // if (employee && employee.id === employeeId) {
+        else{
+            const deletedEmployee = await Employee.deleteOne({_id:employeeId})
+            return deletedEmployee
+        } 
+        // else {
+        //     throw new Error("Employee doesn't exist")
+        // }
     } catch (error) {
-        return error
+        throw error
     }
 }
 
