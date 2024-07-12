@@ -57,21 +57,34 @@ const getEmployees = async (req, res) => {
         return apiResponseErr(null, false, 400, error.message, res)
     }
 }
-const updateEmployee = (req, res) => {
-    editEmployee()
-}
-const deleteEmployee = async(req, res) => {
-    try{
-        const { employeeId } = req.query
-      let result = await removeEmployee(employeeId);
+const updateEmployee = async (req, res) => {
+    try {
+        let data = req.body;
+
+      let result=  await editEmployee(data);
       return apiResponseSuccess(
         {},
         true,
         200,
-        'Employee deleted successfully',
+        'Employee updated successfully',
         res
     )
-    }catch(error){
+    } catch (error) {
+        return apiResponseErr(null, false, 400, error.message, res)
+    }
+}
+const deleteEmployee = async (req, res) => {
+    try {
+        const { employeeId } = req.query
+        let result = await removeEmployee(employeeId)
+        return apiResponseSuccess(
+            {},
+            true,
+            200,
+            'Employee deleted successfully',
+            res
+        )
+    } catch (error) {
         return apiResponseErr(null, false, 400, error.message, res)
     }
 }

@@ -47,19 +47,52 @@ const getAllEmployees = async (page, limit, offset) => {
         throw error
     }
 }
-const editEmployee = (data) => {}
+const editEmployee = async (data) => {
+    try {
+        // console.log(data.employeeId)
+        const employee = await Employee.findById(data.employeeId)
+        // console.log(employee)
+        if (!employee) {
+            // console.log("employee",employee)
+            throw new Error("Employee doesn't exist")
+        }
+
+        //    if (employee && employee._id === data.employeeId) {
+           else{
+        const updatedEmployee = await Employee.updateOne(
+            {_id:data.employeeId},
+            {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                designation: data.designation,
+                department: data.department,
+                salary: data.salary,
+                date_of_joining: data.date_of_joining,
+            }
+        )
+        // console.log('update', updatedEmployee)
+        return updatedEmployee
+        }
+        // else {
+        //     console.log(employee)
+        //     throw new Error("Employee doesn't exist")
+        // }
+    } catch (error) {
+        throw error
+    }
+}
 const removeEmployee = async (employeeId) => {
     try {
         const employee = await Employee.findById(employeeId)
         if (employee && employee.id === employeeId) {
             const deletedEmployee = await Employee.deleteOne(employee)
             return deletedEmployee
-          
         } else {
             throw new Error("Employee doesn't exist")
         }
     } catch (error) {
-        throw error
+        return error
     }
 }
 
