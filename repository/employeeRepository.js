@@ -52,27 +52,43 @@ const editEmployee = async (data) => {
         // console.log(data.employeeId)
         const employee = await Employee.findById(data.employeeId)
         // console.log(employee)
+        const existedEmployee = await Employee.findOne({
+            $or: [{ email: data.email }, { phone: data.phone }],
+            _id: { $ne: data.employeeId },
+        })
+        // console.log(existedEmployee._id);
+        // console.log(data.employeeId)
         if (!employee) {
             // console.log("employee",employee)
             throw new Error("Employee doesn't exist")
+        } else if (
+            existedEmployee &&
+            existedEmployee.email === data.email &&
+            existedEmployee.phone === data.phone
+        ) {
+            throw new Error('Email and Phone no already exists')
+        } else if (existedEmployee && existedEmployee.email === data.email) {
+            throw new Error('Email already Exists')
+        } else if (existedEmployee && existedEmployee.phone === data.phone) {
+            throw new Error('Phone no already Exists')
         }
 
         //    if (employee && employee._id === data.employeeId) {
-           else{
-        const updatedEmployee = await Employee.updateOne(
-            {_id:data.employeeId},
-            {
-                name: data.name,
-                email: data.email,
-                phone: data.phone,
-                designation: data.designation,
-                department: data.department,
-                salary: data.salary,
-                date_of_joining: data.date_of_joining,
-            }
-        )
-        // console.log('update', updatedEmployee)
-        return updatedEmployee
+        else {
+            const updatedEmployee = await Employee.updateOne(
+                { _id: data.employeeId },
+                {
+                    name: data.name,
+                    email: data.email,
+                    phone: data.phone,
+                    designation: data.designation,
+                    department: data.department,
+                    salary: data.salary,
+                    date_of_joining: data.date_of_joining,
+                }
+            )
+            // console.log('update', updatedEmployee)
+            return updatedEmployee
         }
         // else {
         //     console.log(employee)
@@ -86,15 +102,17 @@ const removeEmployee = async (employeeId) => {
     try {
         const employee = await Employee.findById(employeeId)
         // console.log(employee)
-        if(!employee){
+        if (!employee) {
             // console.log("ghhik")
             throw new Error("Employee doesn't exist")
         }
         // if (employee && employee.id === employeeId) {
-        else{
-            const deletedEmployee = await Employee.deleteOne({_id:employeeId})
+        else {
+            const deletedEmployee = await Employee.deleteOne({
+                _id: employeeId,
+            })
             return deletedEmployee
-        } 
+        }
         // else {
         //     throw new Error("Employee doesn't exist")
         // }
