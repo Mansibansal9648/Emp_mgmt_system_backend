@@ -19,7 +19,7 @@ app.use(express.json())
 app.use('/api', employeeRouter)
 
 app.post('/', (req, res) => {
-    res.send("Yipee! backend is working fine")
+    res.send('Yipee! backend is working fine')
 })
 
 app.listen(process.env.PORT, () => {

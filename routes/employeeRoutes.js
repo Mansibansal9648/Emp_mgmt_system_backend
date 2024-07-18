@@ -5,12 +5,16 @@ import {
     updateEmployee,
     deleteEmployee,
 } from '../controllers/employeeController.js'
+import { createEmployeeSchema,updateEmployeeSchema } from '../utils/validationSchema.js'
+import { validationHandler } from '../middlewares/validationHandler.js'
 
 const router = Router()
 
-router.route('/employee').post(createEmployee)
-router.route('/allEmployees').get(getEmployees)
-router.route('/editemployee').post(updateEmployee)
-router.route('/deleteemployee').post(deleteEmployee)
+router
+    .route('/create-employee')
+    .post(createEmployeeSchema, validationHandler, createEmployee)
+router.route('/all-employees').get(getEmployees)
+router.route('/edit-employee').put(updateEmployeeSchema,validationHandler,updateEmployee)
+router.route('/delete-employee').delete(deleteEmployee)
 
 export default router
