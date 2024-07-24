@@ -88,11 +88,22 @@ const createAdminSchema = [
         .notEmpty()
         .withMessage('User type is required field')
         .bail()
-        .custom(async(value) => {
+        .custom(async (value) => {
             if (value != 'Admin') {
                 throw new Error('User type must be a Admin')
             }
         }),
     body('password').notEmpty().withMessage('Password is required field'),
 ]
-export { createEmployeeSchema, updateEmployeeSchema, createAdminSchema }
+
+const adminLoginSchema = [
+    body('email').notEmpty().withMessage('Email is required field'),
+    body('password').notEmpty().withMessage('Password is required field'),
+]
+
+export {
+    createEmployeeSchema,
+    updateEmployeeSchema,
+    createAdminSchema,
+    adminLoginSchema,
+}
