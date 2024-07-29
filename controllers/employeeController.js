@@ -9,14 +9,20 @@ import {
     apiResponseErr,
     apiResponsePagination,
 } from '../middlewares/apiResponse.js'
+import bcrypt from 'bcrypt'
 
 const createEmployee = async (req, res) => {
     try {
         let data = req.body
+        let password="Admin@123"
         let email = data.email.toLowerCase().split('@')[0].replaceAll('.', '')
         data.email = email + '@' + data.email.split('@')[1]
 
         // console.log("body", data);
+        const passwordSalt = await bcrypt.genSalt()
+
+        let hashedPassword = await bcrypt.hash(password, passwordSalt)
+        data.password = hashedPassword
         let result = await createNewEmployee(data)
         // console.log("result",result)
         return apiResponseSuccess(

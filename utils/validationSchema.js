@@ -64,6 +64,15 @@ const createEmployeeSchema = [
                 throw new Error('Date of joining cannot be in the future')
             }
         }),
+        body('userType')
+        .notEmpty()
+        .withMessage('User type is required field')
+        .bail()
+        .custom(async (value) => {
+            if (value != 'Employee') {
+                throw new Error('User type must be a Employee')
+            }
+        }),
 ]
 
 const updateEmployeeSchema = [
@@ -96,7 +105,7 @@ const createAdminSchema = [
     body('password').notEmpty().withMessage('Password is required field'),
 ]
 
-const adminLoginSchema = [
+const loginSchema = [
     body('email').notEmpty().withMessage('Email is required field'),
     body('password').notEmpty().withMessage('Password is required field'),
 ]
@@ -105,5 +114,5 @@ export {
     createEmployeeSchema,
     updateEmployeeSchema,
     createAdminSchema,
-    adminLoginSchema,
+    loginSchema,
 }
