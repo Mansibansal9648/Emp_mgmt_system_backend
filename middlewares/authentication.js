@@ -29,8 +29,8 @@ const authenticateToken = (roles) => {
                 )
             }
             // if ((roles.includes(userTypes.ADMIN)) && (result.data.userType==userTypes.ADMIN)) {
-              if (result.data.userType===roles.includes(userTypes.ADMIN)) {
-              console.log(result)
+                if (!roles.includes(result.data.userType)) {
+              console.log(roles.includes(result.data.userType))
                 return apiResponseErr(
                     null,
                     false,
