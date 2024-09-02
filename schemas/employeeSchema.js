@@ -16,8 +16,9 @@ const schema = new Schema({
     date_of_joining: { type: String, required: true },
     password: {
         type: String,
-        default: 'Admin@123',
+       required:true
     },
+    userType: { type: String, required: true },
 })
 
 export const Employee = mongoose.model('employees', schema)
